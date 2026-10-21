@@ -1,0 +1,7 @@
+{
+  "name": "luce-dash",
+  "version": "0.1.0",
+  "description": "Ferrari Luce style telemetry dashboard: a pane with speed (tokens/min), RPM (tools/min), fuel (context left), gear, lap times and cost.",
+  "types": "./types/index.d.ts",
+  "license": "MIT"
+}
