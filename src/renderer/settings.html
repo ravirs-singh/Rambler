@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'unsafe-inline'; script-src 'self'" />
+  <title>Flow Clone settings</title>
+  <style>
+    body { font: 14px/1.4 -apple-system, "Segoe UI", system-ui, sans-serif; margin: 0; padding: 20px 24px; color: #1b1b1f; background: #fafafa; }
+    h1 { font-size: 18px; margin: 0 0 12px; }
+    h2 { font-size: 14px; margin: 22px 0 8px; text-transform: uppercase; letter-spacing: .04em; color: #555; }
+    label { display: grid; grid-template-columns: 180px 1fr; align-items: center; gap: 8px; margin: 6px 0; }
+    input, select, textarea { font: inherit; padding: 5px 8px; border: 1px solid #c9c9cf; border-radius: 6px; background: #fff; }
+    textarea { width: 100%; min-height: 90px; }
+    .hint { color: #666; font-size: 12px; margin: 2px 0 0 188px; }
+    .row { display: flex; gap: 8px; align-items: center; }
+    button { font: inherit; padding: 6px 12px; border-radius: 6px; border: 1px solid #888; background: #fff; cursor: pointer; }
+    button.primary { background: #111; color: #fff; border-color: #111; }
+    #status { color: #0a7; margin-left: 10px; }
+    table { border-collapse: collapse; width: 100%; font-size: 12px; }
+    td, th { text-align: left; padding: 4px 6px; border-bottom: 1px solid #e5e5ea; vertical-align: top; }
+    code { background: #eee; padding: 1px 4px; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <h1>Flow Clone</h1>
+  <div id="stats"></div>
+
+  <h2>Trigger</h2>
+  <label>Hotkey <input id="hotkey.key" placeholder="RightAlt, RightCtrl, F8, CapsLock…" /></label>
+  <div class="hint">Hold to dictate, release to insert. Double-tap to lock hands-free; press again to stop. Escape cancels. Restart the app after changing.</div>
+  <label>Enabled <input type="checkbox" id="enabled" /></label>
+
+  <h2>Speech to text</h2>
+  <label>Provider <select id="stt.provider"><option value="local">Local whisper server (free)</option><option value="deepgram">Deepgram (streaming)</option><option value="openai">OpenAI-compatible (batch)</option></select></label>
+  <label>Local server base URL <input id="stt.local.baseUrl" /></label>
+  <label>Local model name <input id="stt.local.model" /></label>
+  <label>Deepgram API key <input id="stt.deepgram.apiKey" type="password" placeholder="or env DEEPGRAM_API_KEY" /></label>
+  <label>Deepgram model <input id="stt.deepgram.model" /></label>
+  <label>OpenAI-compatible base URL <input id="stt.openai.baseUrl" /></label>
+  <label>OpenAI-compatible key <input id="stt.openai.apiKey" type="password" placeholder="or env OPENAI_API_KEY (leave blank for local servers)" /></label>
+  <label>Transcription model <input id="stt.openai.model" placeholder="gpt-4o-transcribe, whisper-1, whisper-large-v3…" /></label>
+
+  <h2>Formatting</h2>
+  <label>Formatter <select id="formatter.provider"><option value="none">Local rules only (free)</option><option value="anthropic">Claude (Anthropic)</option></select></label>
+  <label>Anthropic API key <input id="formatter.anthropic.apiKey" type="password" placeholder="or env ANTHROPIC_API_KEY / ant auth login" /></label>
+  <label>Model <input id="formatter.anthropic.model" /></label>
+  <label>Effort <select id="formatter.anthropic.effort"><option>low</option><option>medium</option><option>high</option></select></label>
+  <label>Style <select id="formatter.style"><option value="auto">auto (match the field)</option><option value="casual">casual</option><option value="formal">formal</option></select></label>
+
+  <h2>Insertion</h2>
+  <label>Method <select id="insert.method"><option value="paste">Clipboard + paste chord (restores clipboard)</option><option value="type">Type keystrokes</option><option value="clipboard">Clipboard only (paste manually)</option></select></label>
+  <label>Overlay pill <input type="checkbox" id="overlay.enabled" /></label>
+  <label>Sounds <input type="checkbox" id="overlay.sounds" /></label>
+  <label>Read field context <input type="checkbox" id="context.enabled" /></label>
+
+  <h2>Dictionary</h2>
+  <div class="hint" style="margin-left:0">One entry per line. <code>Word</code> enforces spelling/casing; <code>heard phrase =&gt; Replacement</code> rewrites.</div>
+  <textarea id="dictionary"></textarea>
+
+  <div class="row" style="margin-top:14px"><button class="primary" id="save">Save</button><span id="status"></span></div>
+
+  <h2>Recent dictations</h2>
+  <table id="history"><thead><tr><th>When</th><th>App</th><th>Text</th><th>ms</th></tr></thead><tbody></tbody></table>
+
+  <script src="settings.js"></script>
+</body>
+</html>

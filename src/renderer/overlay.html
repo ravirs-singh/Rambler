@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'unsafe-inline'; script-src 'self'" />
+  <title>overlay</title>
+  <style>
+    :root { --bg: rgba(20, 20, 24, 0.92); --fg: #f5f5f7; --accent: #6ee7b7; --err: #f87171; }
+    html, body { margin: 0; background: transparent; overflow: hidden; font: 14px/1.35 -apple-system, "Segoe UI", system-ui, sans-serif; color: var(--fg); }
+    #pill { position: absolute; left: 50%; bottom: 6px; transform: translateX(-50%); min-width: 160px; max-width: 400px;
+            background: var(--bg); border-radius: 22px; padding: 10px 16px; display: flex; align-items: center; gap: 12px;
+            box-shadow: 0 6px 24px rgba(0,0,0,.35); opacity: 0; transition: opacity .15s; }
+    #pill.visible { opacity: 1; }
+    #bars { display: flex; align-items: center; gap: 3px; height: 22px; width: 38px; }
+    #bars i { display: block; width: 4px; height: 4px; border-radius: 2px; background: var(--accent); transition: height .08s; }
+    #text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 320px; }
+    #text.partial { color: #cfd3da; }
+    #text.error { color: var(--err); }
+    #lock { font-size: 11px; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div id="pill">
+    <div id="bars"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div id="text">Listening…</div>
+    <div id="lock"></div>
+  </div>
+  <script src="overlay.js"></script>
+</body>
+</html>

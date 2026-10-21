@@ -1,0 +1,25 @@
+{
+  "name": "flow-clone",
+  "productName": "Flow Clone",
+  "version": "0.1.0",
+  "description": "Open-source voice dictation in the style of Wispr Flow: hold a key, speak, get formatted text pasted into any app.",
+  "main": "src/main/index.js",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "electron .",
+    "smoke": "FLOW_CLONE_SMOKE=1 electron --no-sandbox --use-fake-device-for-media-stream --use-fake-ui-for-media-stream .",
+    "test": "node --test",
+    "build:helper:mac": "swiftc -O -framework Cocoa -framework ApplicationServices -o helper/macos/ax-context helper/macos/ax-context.swift"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.137.0",
+    "uiohook-napi": "^1.5.5"
+  },
+  "devDependencies": {
+    "electron": "^45.0.0"
+  }
+}
