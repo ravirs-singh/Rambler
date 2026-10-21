@@ -4,7 +4,7 @@ const path = require('node:path');
 
 function createLog(dir) {
   fs.mkdirSync(dir, { recursive: true });
-  const file = path.join(dir, 'flow-clone.log');
+  const file = path.join(dir, 'rambler.log');
   const write = (level, msg) => {
     const line = `${new Date().toISOString()} ${level.padEnd(5)} ${msg}`;
     (level === 'error' ? console.error : console.log)(line);

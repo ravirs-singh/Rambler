@@ -38,7 +38,7 @@ function buildTrayMenu(config, history) {
   const cfg = config.get();
   const stats = history.stats();
   return Menu.buildFromTemplate([
-    { label: `Flow Clone  ·  ${stats.words} words, ${stats.dictations} takes`, enabled: false },
+    { label: `Rambler  ·  ${stats.words} words, ${stats.dictations} takes`, enabled: false },
     { type: 'separator' },
     { label: 'Enabled', type: 'checkbox', checked: cfg.enabled, click: (m) => config.update({ enabled: m.checked }) },
     { label: `Hotkey: hold ${cfg.hotkey.key}, double-tap to lock`, enabled: false },
@@ -77,7 +77,7 @@ app.whenReady().then(async () => {
   global.log = log;
   const config = new Config(path.join(userData, 'config.json'));
   const history = new History(userData);
-  log.info(`starting flow-clone ${app.getVersion()} (${process.platform}) data=${userData}`);
+  log.info(`starting rambler ${app.getVersion()} (${process.platform}) data=${userData}`);
 
   const capture = createCaptureBridge(config, log);
   overlay = createOverlay(config);
@@ -114,7 +114,7 @@ app.whenReady().then(async () => {
   }
 
   tray = new Tray(trayIcon());
-  tray.setToolTip('Flow Clone');
+  tray.setToolTip('Rambler');
   const refreshMenu = () => tray.setContextMenu(buildTrayMenu(config, history));
   refreshMenu();
   config.onChange(refreshMenu);

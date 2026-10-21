@@ -9,7 +9,8 @@ const { execFile } = require('node:child_process');
 const fs = require('node:fs');
 const path = require('node:path');
 
-const HELPER_DIR = path.join(__dirname, '..', '..', '..', 'helper');
+// Helpers are executables, so they live outside the asar in packaged builds.
+const HELPER_DIR = path.join(__dirname, '..', '..', '..', 'helper').replace(`${path.sep}app.asar${path.sep}`, `${path.sep}app.asar.unpacked${path.sep}`);
 
 function run(cmd, args, timeoutMs) {
   return new Promise((resolve) => {

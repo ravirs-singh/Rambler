@@ -1,3 +1,4 @@
 node_modules/
+dist/
 helper/macos/ax-context
 *.log

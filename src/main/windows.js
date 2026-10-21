@@ -106,7 +106,7 @@ function openSettings(config, history) {
   settingsWin = new BrowserWindow({
     width: 720,
     height: 760,
-    title: 'Flow Clone settings',
+    title: 'Rambler settings',
     webPreferences: {
       preload: path.join(PRELOAD, 'settings.js'),
       contextIsolation: true,

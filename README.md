@@ -1,4 +1,4 @@
-# Flow Clone
+# Rambler
 
 A small, open-source voice dictation app in the style of Wispr Flow. Hold a key,
 speak, release: the transcript is cleaned up and pasted into whatever app has
@@ -69,6 +69,19 @@ npm start
 `base.en` is fast on any laptop; `small.en` or `medium.en` are more accurate
 if your machine can keep up. Any other OpenAI-compatible local server works
 too (faster-whisper / Speaches): point `stt.local.baseUrl` at it in Settings.
+
+## Build a double-clickable Mac app
+
+```bash
+npm run package:mac
+open dist/Rambler-darwin-arm64        # drag Rambler.app to Applications
+```
+
+The packaged app runs without a terminal and lives in the menu bar. Grant it
+Microphone, Accessibility and Input Monitoring the first time (it is a new
+binary, so the grants given to Electron during `npm start` do not carry over).
+Start the whisper server before launching it. Run the same command without
+`:mac` on Windows or Linux to package for that platform.
 
 ## Paid options (optional)
 

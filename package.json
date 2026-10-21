@@ -1,8 +1,8 @@
 {
-  "name": "flow-clone",
-  "productName": "Flow Clone",
+  "name": "rambler",
+  "productName": "Rambler",
   "version": "0.1.0",
-  "description": "Open-source voice dictation in the style of Wispr Flow: hold a key, speak, get formatted text pasted into any app.",
+  "description": "Rambler: open-source voice dictation. Hold a key, speak, get formatted text pasted into any app.",
   "main": "src/main/index.js",
   "license": "MIT",
   "private": true,
@@ -13,13 +13,16 @@
     "start": "electron .",
     "smoke": "FLOW_CLONE_SMOKE=1 electron --no-sandbox --use-fake-device-for-media-stream --use-fake-ui-for-media-stream .",
     "test": "node --test",
-    "build:helper:mac": "swiftc -O -framework Cocoa -framework ApplicationServices -o helper/macos/ax-context helper/macos/ax-context.swift"
+    "build:helper:mac": "swiftc -O -framework Cocoa -framework ApplicationServices -o helper/macos/ax-context helper/macos/ax-context.swift",
+    "package": "electron-packager . Rambler --out=dist --overwrite --prune=true --asar.unpackDir=\"{helper,node_modules/uiohook-napi}\" --ignore=\"^/dist|^/test|^/\\\\.git|^/helper/macos/.*\\\\.swift$\" --app-bundle-id=com.rambler.dictation --app-category-type=public.app-category.productivity",
+    "package:mac": "npm run package -- --platform=darwin --arch=arm64"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.137.0",
     "uiohook-napi": "^1.5.5"
   },
   "devDependencies": {
+    "@electron/packager": "^20.3.0",
     "electron": "^45.0.0"
   }
 }
