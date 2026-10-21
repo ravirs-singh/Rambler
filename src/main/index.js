@@ -98,6 +98,11 @@ app.whenReady().then(async () => {
   dictation.on('partial', (p) => overlay.partial(p.text));
   dictation.on('level', (l) => overlay.level(l));
 
+  if (process.platform === 'darwin') {
+    // Triggers the system prompt and lists this binary under Accessibility.
+    const trusted = electron.systemPreferences.isTrustedAccessibilityClient(true);
+    if (!trusted) log.warn('Accessibility permission not granted yet: enable Electron in System Settings > Privacy & Security > Accessibility and Input Monitoring, then restart.');
+  }
   hotkey = new HotkeyController(config, log);
   try {
     const machine = hotkey.start();
